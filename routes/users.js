@@ -1,7 +1,8 @@
-const router = require("express").Router()
-const { getUsers, getUser, createUser } = require("../controllers/users")
-const mongoose = require("mongoose");
 
+
+const router = require("express").Router();
+
+const { getUsers, getUser, createUser } = require("../controllers/users");
 
 router.get("/", getUsers); // /users
 router.get("/:userId", getUser); // /users/:userId

@@ -1,9 +1,7 @@
-const user = require("../models/user");
 
-//GET / users
-
-const getUser = (re, res) => {
-  console.log("IN CONTROLLER");
-}
+// GET /users/:id
+const getUser = (req, res) => {
+  res.send("This will return a user by ID");
+};
 
 module.exports = { getUser };

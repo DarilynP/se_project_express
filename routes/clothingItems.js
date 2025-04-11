@@ -1,5 +1,6 @@
 
 const router = require("express").Router();
+
 const clothingItemController = require("../controllers/clothingItems"); // Import controller
 
 // Destructure functions directly from the controller
@@ -13,7 +14,7 @@ const {
 } = clothingItemController;
 
 router.get("/", getItems); // Get all items
-console.log(clothingItemController); // Log to check if the controller is imported correctly
+// console.log(clothingItemController); // Log to check if the controller is imported correctly
 
 router.post("/", createClothingItem); // Create an item
 

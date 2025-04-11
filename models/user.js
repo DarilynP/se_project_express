@@ -1,17 +1,19 @@
 const router = require("express").Router()
 
-router.get("/users", () => console.log("GET users"));
-
 module.exports = router;
 
-
 const mongoose = require("mongoose");
+
 const validator = require("validator");
+
+const { getUsers } = require("../controllers/users");
+
+router.get("/users", getUsers);
 
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: [true, "Name is required"], 
+    required: [true, "Name is required"],
     minlength: 2,
     maxlength: [30, 'Name cannot be longer than 30 characters']
   },
