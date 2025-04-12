@@ -4,7 +4,14 @@ const userRouter = require("./users");
 
 const itemRouter = require("./clothingItems");
 
+const { NOT_FOUND } = require("../utils/errors");
+
 router.use("/users", userRouter);
-router.use("/item", itemRouter);
+router.use("/items", itemRouter); // changed from singular to plural for consistency
+
+// Handle unknown routes
+router.use((req, res) => {
+  res.status(NOT_FOUND).send({ message: "Requested resource not found" });
+});
 
 module.exports = router;

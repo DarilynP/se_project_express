@@ -6,12 +6,7 @@ const User = require("../models/user");
 // GET /users
 const getUsers = (req, res) => {
   User.find({})
-    .then((users) => {
-      if (!users || users.length === 0) {
-        return res.status(NOT_FOUND).send({ message: "No users found." });
-      }
-      return res.json(users);
-    })
+    .then((users) => res.json(users))
     .catch(() =>
       res.status(SERVER_ERROR).send({ message: "An error occurred while fetching users." })
     );

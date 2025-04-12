@@ -56,7 +56,12 @@ const likeItem = (req, res) => {
       }
       return res.send(item);
     })
-    .catch(() => res.status(BAD_REQUEST).send({ message: "Invalid item ID" }));
+    .catch((err) => {
+      if (err.name === "CastError") {
+        return res.status(BAD_REQUEST).send({ message: "Invalid item ID" });
+      }
+      return res.status(SERVER_ERROR).send({ message: "Server error liking item" });
+    });
 };
 
 // DELETE /items/:itemId/likes
@@ -72,7 +77,12 @@ const dislikeItem = (req, res) => {
       }
       return res.send(item);
     })
-    .catch(() => res.status(BAD_REQUEST).send({ message: "Invalid item ID" }));
+    .catch((err) => {
+      if (err.name === "CastError") {
+        return res.status(BAD_REQUEST).send({ message: "Invalid item ID" });
+      }
+      return res.status(SERVER_ERROR).send({ message: "Server error disliking item" });
+    });
 };
 
 module.exports = {
