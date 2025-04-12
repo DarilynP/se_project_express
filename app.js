@@ -1,8 +1,11 @@
 const mongoose = require("mongoose");
+
 const express = require("express");
+
 const app = express();
 
 const routes = require("./routes/index"); // Import the central router
+
 const { PORT = 3001 } = process.env;
 
 app.use(express.json()); // Middleware to parse JSON

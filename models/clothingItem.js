@@ -34,7 +34,11 @@ const clothingItemSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
     default: []
-  }]
+  }],
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  }
 }, { versionKey: false });
 
 module.exports = mongoose.model("ClothingItem", clothingItemSchema);

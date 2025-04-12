@@ -7,8 +7,7 @@ const clothingItemController = require("../controllers/clothingItems"); // Impor
 const {
   getItems,
   deleteItem,
-  createClothingItem,
-  getClothingItem,
+  createItem,
   likeItem,
   dislikeItem,
 } = clothingItemController;
@@ -16,9 +15,7 @@ const {
 router.get("/", getItems); // Get all items
 // console.log(clothingItemController); // Log to check if the controller is imported correctly
 
-router.post("/", createClothingItem); // Create an item
-
-router.get("/:id", getClothingItem); // Get item by ID
+router.post("/", createItem); // Create an item
 router.delete("/:itemId", deleteItem); // Delete item by ID
 
 // Likes and Dislikes

@@ -14,9 +14,15 @@ const createItem = (req, res) => {
   const owner = req.user._id;
 
   ClothingItem.create({ name, weather, imageUrl, owner })
-    .then((item) => res.status(201).send(item))
-    .catch(() => res.status(BAD_REQUEST).send({ message: "Invalid data" }));
+  .then((item) => res.status(201).send(item))
+  .catch((err) => {
+    if (err.name === "ValidationError") {
+      return res.status(BAD_REQUEST).send({ message: "Invalid data" });
+    }
+    return res.status(SERVER_ERROR).send({ message: "Server error creating item" });
+  });
 };
+
 
 // DELETE /items/:itemId
 const deleteItem = (req, res) => {
