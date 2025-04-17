@@ -5,7 +5,6 @@ const clothingItemController = require("../controllers/clothingItems"); // Impor
 
 // Destructure functions directly from the controller
 const {
-  getItems,
   deleteItem,
   createItem,
   likeItem,
