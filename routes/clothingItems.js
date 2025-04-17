@@ -12,7 +12,7 @@ const {
   dislikeItem,
 } = clothingItemController;
 
-router.get("/", getItems); // Get all items
+
 // console.log(clothingItemController); // Log to check if the controller is imported correctly
 
 router.post("/", createItem); // Create an item

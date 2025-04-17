@@ -1,26 +1,27 @@
 const router = require("express").Router();
 
 const userRouter = require("./users");
+const itemRouter = require("./clothingItems");
 
 const auth = require("../middlewares/auth");
 
-const itemRouter = require("./clothingItems");
-
 const { NOT_FOUND } = require("../utils/errors");
 const { login, createUser } = require("../controllers/users");
-const { getClothingItems } = require('../controllers/clothingItems');
+const { getItems } = require("../controllers/clothingItems");
 
 // Routes that do not require authentication
 router.post("/signin", login);
 router.post("/signup", createUser);
 
+// Public route - should not be protected
+router.get("/items", getItems);
+
 // Apply the authentication middleware for routes that require it
 router.use(auth);
 
 // Routes that require authentication
-router.get("/items", getClothingItems);
 router.use("/users", userRouter);
-router.use("/items", itemRouter); // changed from singular to plural for consistency
+router.use("/items", itemRouter);
 
 // Handle unknown routes
 router.use((req, res) => {
