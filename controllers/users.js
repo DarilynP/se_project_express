@@ -30,6 +30,7 @@ const getCurrentUser = (req, res) => {
 
 // POST /users - Create a new user
 const createUser = (req, res) => {
+  console.log(req.body);
   const { name, avatar, email, password } = req.body;
 
   bcrypt

@@ -4,6 +4,9 @@ const { JWT_SECRET } = require("../utils/config");
 
 module.exports = (req, res, next) => {
   const { authorization } = req.headers;
+  // console.log("Authorization header:", authorization);
+  // console.log("Extracted token:", token);
+  // console.log("Verified payload:", payload);
 
   // Check if header exists and starts with "Bearer "
   if (!authorization || !authorization.startsWith("Bearer ")) {

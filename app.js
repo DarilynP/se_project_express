@@ -27,5 +27,7 @@ app.use(cors());
 app.use(routes);
 
 // Start server
-app.listen(PORT);
+app.listen(3001, () => {
+  console.log("server running on port 3001");
+});
 
