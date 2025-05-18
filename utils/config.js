@@ -1,3 +1,5 @@
-const JWT_SECRET = "some-secret-key"; // later you'll replace this with a secure env variable
+const { JWT_SECRET } = require('./config');
+const jwt = require('jsonwebtoken');
 
-module.exports = { JWT_SECRET };
+// When signing tokens:
+const token = jwt.sign({ _id: user._id }, JWT_SECRET);
