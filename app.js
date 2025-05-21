@@ -12,7 +12,9 @@ const { PORT = 3001 } = process.env;
 const app = express();
 
 app.use(express.json()); // Middleware to parse JSON
-app.use(cors({ orgin: "*" }));
+app.use(
+  cors({ orgin: "https://devdarilyn.ignorelist.com", credentials: true })
+);
 
 // Connect to MongoDB
 mongoose

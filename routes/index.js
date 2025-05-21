@@ -16,15 +16,15 @@ router.post("/signin", login);
 router.post("/signup", createUser);
 
 // Public route - should not be protected
-// router.get("/items", getItems);
-router.get("/items", itemRouter); // If you want this public,
+router.get("/items", getItems);
+
 
 // Apply the authentication middleware for routes that require it
 router.use(auth);
 
 // Routes that require authentication
 router.use("/users", userRouter);
-// router.use("/items", itemRouter);
+router.use("/items", itemRouter);
 // router.use("/items", clothingItemRoutes);
 
 // Handle unknown routes
