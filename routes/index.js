@@ -9,6 +9,8 @@ const { NOT_FOUND } = require("../utils/errors");
 const { login, createUser } = require("../controllers/users");
 const { getItems } = require("../controllers/clothingItems");
 
+
+
 // Routes that do not require authentication
 router.post("/signin", login);
 router.post("/signup", createUser);

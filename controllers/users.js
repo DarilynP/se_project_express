@@ -1,6 +1,8 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = require("../utils/config");
+// const token = jwt.sign({ _id: user._id }, JWT_SECRET, { expiresIn: '7d' });
+
 const {
   BAD_REQUEST,
   NOT_FOUND,
