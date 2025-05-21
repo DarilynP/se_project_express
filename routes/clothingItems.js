@@ -9,11 +9,13 @@ const {
   createItem,
   likeItem,
   dislikeItem,
+  getItems
 } = clothingItemController;
 
 
 // console.log(clothingItemController); // Log to check if the controller is imported correctly
 
+router.get("/",getItems);
 router.post("/", createItem); // Create an item
 router.delete("/:itemId", deleteItem); // Delete item by ID
 
