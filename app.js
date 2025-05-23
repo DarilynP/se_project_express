@@ -13,7 +13,7 @@ const app = express();
 
 app.use(express.json()); // Middleware to parse JSON
 app.use(
-  cors({ orgin: "https://devdarilyn.ignorelist.com", credentials: true })
+  cors({ origin: "https://devdarilyn.ignorelist.com", credentials: true })
 );
 
 // Connect to MongoDB

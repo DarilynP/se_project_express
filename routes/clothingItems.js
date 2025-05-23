@@ -1,5 +1,6 @@
 
 const router = require("express").Router();
+const { celebrate, Joi, Seggments} = require ("celebrate");
 
 const clothingItemController = require("../controllers/clothingItems"); // Import controller
 
@@ -12,15 +13,28 @@ const {
   getItems
 } = clothingItemController;
 
+// Validation Schemas
+const itemIdValidation = celebrate({
+  [Segments.PARAMS]: Joi.object().keys({
+    itemId: Joi.string().hex().length(24).required(),
+  }),
+});
 
-// console.log(clothingItemController); // Log to check if the controller is imported correctly
+const createItemValidation = celebrate({
+  [Segments.BODY]: Joi.object().keys({
+    name: Joi.string().required(),
+    imageUrl: Joi.string().uri().required(),
+    weather: Joi.string().valid("hot", "warm", "cold").required(),
+  }),
+});
+
 
 router.get("/",getItems);
-router.post("/", createItem); // Create an item
-router.delete("/:itemId", deleteItem); // Delete item by ID
+router.post("/", createItemValidation, createItem); // Create an item
+router.delete("/:itemId", itemIdValidation, deleteItem); // Delete item by ID
 
 // Likes and Dislikes
-router.put("/:itemId/likes", likeItem); // Like an item
-router.delete("/:itemId/likes", dislikeItem); // Unlike an item
+router.put("/:itemId/likes",itemIdValidation, likeItem); // Like an item
+router.delete("/:itemId/likes", itemIdValidation, dislikeItem); // Unlike an item
 
 module.exports = router;

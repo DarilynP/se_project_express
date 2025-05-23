@@ -1,11 +1,12 @@
 const ClothingItem = require("../models/clothingItem");
 const { BAD_REQUEST, NOT_FOUND, SERVER_ERROR, FORBIDDEN } = require("../utils/errors");
+const { InternalServerError } = require("../controllers/CoustomError");
 
 // GET /items
-const getItems = (req, res) => {
+const getItems = (req, res, next) => {
   ClothingItem.find({})
     .then((items) => res.send(items))
-    .catch(() => res.status(SERVER_ERROR).send({ message: "Server error getting clothing items" }));
+    .catch(() => next(new InternalServerError("Error fetching clothing items")));
 };
 
 // POST /items

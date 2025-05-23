@@ -1,6 +1,11 @@
+const errorHandler = (err, req, res, next) => {
+  const { statusCode = 500, message } = err;
 
-
-module.exports = (err, req, res, next) => {
-  // your error handling logic here
-  res.status(err.statusCode || 500).send({ message: err.message || 'Internal Server Error' });
+  res.status(statusCode).send({
+    message: statusCode === 500
+      ? 'Internal Server Error'
+      : message,
+  });
 };
+
+module.exports = errorHandler;

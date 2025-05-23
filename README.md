@@ -7,6 +7,10 @@ This project focuses on building the back-end server for the **What to Wear?** (
 - **MongoDB** for the database and **Mongoose** for MongoDB ODM (Object Data Modeling)
 - **Nodemon** for development with hot reloading
 
+## 🌐 Deployed URLs
+
+- **Frontend**: [https://devdarilyn.ignorelist.com](https://devdarilyn.ignorelist.com)
+- **Backend**: [https://api.devdarilyn.ignorelist.com](https://api.devdarilyn.ignorelist.com)
 
 ## Running the Project
 `npm run start` — to launch the server 
