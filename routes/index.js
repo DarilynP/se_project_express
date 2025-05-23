@@ -5,8 +5,9 @@ const userRouter = require("./users");
 const itemRouter = require("./clothingItems");
 // const clothingItemRoutes = require("./items");
 const auth = require("../middlewares/auth");
+const { NotFoundError } = require("../controllers/errors");
 
-const { NOT_FOUND } = require("../utils/errors");
+
 const { login, createUser } = require("../controllers/users");
 const { getItems } = require("../controllers/clothingItems");
 
@@ -45,9 +46,7 @@ router.use("/items", itemRouter);
 
 // Handle unknown routes
 router.use((req, res, next) => {
-  const error = new Error("Requested resource not found");
-  error.statusCode = NOT_FOUND;
-  next(error); // Pass to centralized error handler
+  next(new NotFoundError("Requested resource not found"));
 });
 
 module.exports = router;

@@ -1,6 +1,6 @@
 
 const router = require("express").Router();
-const { celebrate, Joi, Seggments} = require ("celebrate");
+const { celebrate, Joi, Segments} = require ("celebrate");
 
 const clothingItemController = require("../controllers/clothingItems"); // Import controller
 

@@ -2,14 +2,11 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = require("../utils/config");
 const User = require("../models/user");
-
-const {
-  BadRequestError,
-  NotFoundError,
-  ConflictError,
-  UnauthorizedError,
-  ServerError,
-} = require("../errors/CustomErrors");
+const BadRequestError = require("./errors/BadRequestError");
+const NotFoundError = require("./errors/NotFoundError");
+const ConflictError = require("./errors/ConflictError");
+const UnauthorizedError = require("./errors/UnauthorizedError");
+const ServerError = require("./errors/ServerError");
 
 // GET /users/me
 const getCurrentUser = (req, res, next) => {
@@ -18,11 +15,11 @@ const getCurrentUser = (req, res, next) => {
   User.findById(userId)
     .then((user) => {
       if (!user) {
-        throw new NotFoundError("User not found.");
+        return next(new NotFoundError("User not found."));
       }
-      res.send(user);
+      return res.send(user);
     })
-    .catch(next); // pass errors to error middleware
+    .catch(next);
 };
 
 // POST /users
@@ -52,7 +49,7 @@ const createUser = (req, res, next) => {
           .join(", ");
         return next(new BadRequestError(message));
       }
-      next(new ServerError("Error creating user."));
+      return next(new ServerError("Error creating user."));
     });
 };
 
@@ -64,18 +61,18 @@ const login = (req, res, next) => {
     return next(new BadRequestError("Email and password are required."));
   }
 
-  User.findUserByCredentials(email, password)
+  return User.findUserByCredentials(email, password)
     .then((user) => {
       const token = jwt.sign({ _id: user._id }, JWT_SECRET, {
         expiresIn: "7d",
       });
-      res.send({ token });
+      return res.send({ token });
     })
     .catch((err) => {
       if (err.message === "Incorrect email or password") {
         return next(new UnauthorizedError("Invalid email or password"));
       }
-      next(new ServerError("Server error during login"));
+      return next(new ServerError("Server error during login"));
     });
 };
 
@@ -91,9 +88,9 @@ const updateUser = (req, res, next) => {
   )
     .then((user) => {
       if (!user) {
-        throw new NotFoundError("User not found.");
+        return next(new NotFoundError("User not found."));
       }
-      res.send({
+      return res.send({
         _id: user._id,
         name: user.name,
         avatar: user.avatar,
@@ -104,7 +101,7 @@ const updateUser = (req, res, next) => {
       if (err.name === "ValidationError") {
         return next(new BadRequestError("Invalid data provided."));
       }
-      next(new ServerError("Server error while updating user."));
+      return next(new ServerError("Server error while updating user."));
     });
 };
 
