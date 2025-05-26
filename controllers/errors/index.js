@@ -4,6 +4,7 @@ const ConflictError = require('./ConflictError');
 const UnauthorizedError = require('./UnauthorizedError');
 const ServerError = require('./ServerError');
 const InternalServerError = require('./InternalServerError');
+const ForbiddenError = require('./ForbiddenError');
 
 module.exports = {
   BadRequestError,
@@ -12,4 +13,5 @@ module.exports = {
   UnauthorizedError,
   ServerError,
   InternalServerError,
+  ForbiddenError
 };

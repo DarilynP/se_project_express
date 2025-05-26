@@ -1,4 +1,5 @@
 const ClothingItem = require("../models/clothingItem");
+
 const {
   BadRequestError,
   NotFoundError,
@@ -10,7 +11,9 @@ const {
 const getItems = (req, res, next) => {
   ClothingItem.find({})
     .then((items) => res.send(items))
-    .catch(() => next(new InternalServerError("Error fetching clothing items")));
+    .catch(() =>
+      next(new InternalServerError("Error fetching clothing items"))
+    );
 };
 
 // POST /items
@@ -19,13 +22,13 @@ const createItem = (req, res, next) => {
   const owner = req.user._id;
 
   ClothingItem.create({ name, weather, imageUrl, owner })
-  .then((item) => res.status(201).send(item))
-  .catch((err) => {
-    if (err.name === "ValidationError") {
-      return next(new BadRequestError("Invalid data"));
-    }
-    return next(new InternalServerError("Server error creating item"));
-  });
+    .then((item) => res.status(201).send(item))
+    .catch((err) => {
+      if (err.name === "ValidationError") {
+        return next(new BadRequestError("Invalid data"));
+      }
+      return next(new InternalServerError("Server error creating item"));
+    });
 };
 
 // DELETE /items/:itemId
@@ -37,7 +40,9 @@ const deleteItem = (req, res, next) => {
     .orFail(() => new NotFoundError("Item not found"))
     .then((item) => {
       if (item.owner.toString() !== userId) {
-        return next(new ForbiddenError("You are not allowed to delete this item"));
+        return next(
+          new ForbiddenError("You are not allowed to delete this item")
+        );
       }
       return item.deleteOne().then(() => res.send({ message: "Item deleted" }));
     })
@@ -70,7 +75,6 @@ const likeItem = (req, res, next) => {
     });
 };
 
-
 // DELETE /items/:itemId/likes
 const dislikeItem = (req, res, next) => {
   ClothingItem.findByIdAndUpdate(
@@ -91,7 +95,6 @@ const dislikeItem = (req, res, next) => {
       return next(new InternalServerError("Server error disliking item"));
     });
 };
-
 
 module.exports = {
   getItems,
