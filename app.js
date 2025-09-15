@@ -14,11 +14,15 @@ const app = express();
 app.use(express.json()); // Middleware to parse JSON
 app.use(
   cors({
-    origin: ["https://devdarilyn.ignorelist.com", "http://localhost:3000"],
-
+    origin: [
+      "https://devdarilyn.ignorelist.com",
+      "http://localhost:3000",
+      "http://34.67.117.135" 
+    ],
     credentials: true,
   })
 );
+
 
 // Connect to MongoDB
 mongoose
